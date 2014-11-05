@@ -1,0 +1,30 @@
+{
+  "name": "yeast",
+  "version": "0.0.0",
+  "description": "Tiny but linear growing unique id generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter spec --ui bdd test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unshiftio/yeast"
+  },
+  "keywords": [
+    "yeast",
+    "id",
+    "generator",
+    "unique"
+  ],
+  "author": "Arnout Kazemier",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/unshiftio/yeast/issues"
+  },
+  "homepage": "https://github.com/unshiftio/yeast",
+  "devDependencies": {
+    "assume": "0.0.9",
+    "mocha": "2.0.1",
+    "pre-commit": "0.0.9"
+  }
+}
