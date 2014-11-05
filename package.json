@@ -23,8 +23,8 @@
   },
   "homepage": "https://github.com/unshiftio/yeast",
   "devDependencies": {
-    "assume": "0.0.9",
-    "mocha": "2.0.1",
-    "pre-commit": "0.0.9"
+    "assume": "0.0.x",
+    "mocha": "2.0.x",
+    "pre-commit": "0.0.x"
   }
 }
