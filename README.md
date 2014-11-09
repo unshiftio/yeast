@@ -1,5 +1,7 @@
 # yeast
 
+[![Made by unshift](https://img.shields.io/badge/made%20by-unshift-00ffcc.svg?style=flat-square)](http://unshift.io)[![Version npm](http://img.shields.io/npm/v/yeast.svg?style=flat-square)](http://browsenpm.org/package/yeast)[![Build Status](http://img.shields.io/travis/unshiftio/yeast/master.svg?style=flat-square)](https://travis-ci.org/unshiftio/yeast)[![Dependencies](https://img.shields.io/david/unshiftio/yeast.svg?style=flat-square)](https://david-dm.org/unshiftio/yeast)[![Coverage Status](http://img.shields.io/coveralls/unshiftio/yeast/master.svg?style=flat-square)](https://coveralls.io/r/unshiftio/yeast?branch=master)[![IRC channel](http://img.shields.io/badge/IRC-irc.freenode.net%23unshift-00a8ff.svg?style=flat-square)](http://webchat.freenode.net/?channels=unshift)
+
 Yeast is a unique id generator. It was primary designed to generate a unique id
 which can be used for cache busting in requests. A common practise for this is
 to use a time stamp. But there are couple of down sides when using timestamps.
