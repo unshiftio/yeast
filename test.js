@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 describe('yeast', function () {
   'use strict';
 
