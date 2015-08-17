@@ -1,33 +1,32 @@
 # yeast
 
-[![Made by unshift](https://img.shields.io/badge/made%20by-unshift-00ffcc.svg?style=flat-square)](http://unshift.io)[![Version npm](http://img.shields.io/npm/v/yeast.svg?style=flat-square)](http://browsenpm.org/package/yeast)[![Build Status](http://img.shields.io/travis/unshiftio/yeast/master.svg?style=flat-square)](https://travis-ci.org/unshiftio/yeast)[![Dependencies](https://img.shields.io/david/unshiftio/yeast.svg?style=flat-square)](https://david-dm.org/unshiftio/yeast)[![Coverage Status](http://img.shields.io/coveralls/unshiftio/yeast/master.svg?style=flat-square)](https://coveralls.io/r/unshiftio/yeast?branch=master)[![IRC channel](http://img.shields.io/badge/IRC-irc.freenode.net%23unshift-00a8ff.svg?style=flat-square)](http://webchat.freenode.net/?channels=unshift)
+[![Made by unshift](https://img.shields.io/badge/made%20by-unshift-00ffcc.svg?style=flat-square)](http://unshift.io)[![Version npm](https://img.shields.io/npm/v/yeast.svg?style=flat-square)](http://browsenpm.org/package/yeast)[![Build Status](https://img.shields.io/travis/unshiftio/yeast/master.svg?style=flat-square)](https://travis-ci.org/unshiftio/yeast)[![Dependencies](https://img.shields.io/david/unshiftio/yeast.svg?style=flat-square)](https://david-dm.org/unshiftio/yeast)[![Coverage Status](https://img.shields.io/coveralls/unshiftio/yeast/master.svg?style=flat-square)](https://coveralls.io/r/unshiftio/yeast?branch=master)[![IRC channel](https://img.shields.io/badge/IRC-irc.freenode.net%23unshift-00a8ff.svg?style=flat-square)](https://webchat.freenode.net/?channels=unshift)
 
-Yeast is a unique id generator. It was primary designed to generate a unique id
-which can be used for cache busting in requests. A common practise for this is
-to use a time stamp. But there are couple of down sides when using timestamps.
+Yeast is a unique id generator. It has been primary designed to generate a
+unique id which can be used for cache busting. A common practice for this is
+to use a timestamp, but there are couple of downsides when using timestamps.
 
-1. The times tamp is already 13 chars long. This might not matter for 1 request
+1. The timestamp is already 13 chars long. This might not matter for 1 request
    but if you make hundreds of them this quickly adds up in bandwidth and
    processing time.
-2. It's not unique enough. If you generate two stamps right after each other the
-   time wouldn't have passed yet so they would be identical.
+2. It's not unique enough. If you generate two stamps right after each other,
+   they would be identical because the timing accuracy is limited to
+   milliseconds.
 
 Yeast solves both of these issues by:
 
-1. Compressing the generated time stamp to a string instead of a number using
-   `toSting(36)`.
-2. Seed the generated id when the previous generated id is the same as the one
-   it just generated.
+1. Compressing the generated timestamp using a custom `encode()` function that
+   returns a string representation of the number.
+2. Seeding the id in case of collision (when the id is identical to the previous
+   one).
 
 To keep the strings unique it will use the `:` char to separate the generated
-stamp from the seed. As we're using `toString(36)` to encode the time stamp you
-can still retrieve the actual time stamp by parsing it again using
-`parseInt(yeastID, 36)`.
+stamp from the seed.
 
 ## Installation
 
 The module is intended to be used in browsers as well as in Node.js and is
-therefor released in the npm registry and can be installed using:
+therefore released in the npm registry and can be installed using:
 
 ```
 npm install --save yeast
@@ -35,19 +34,42 @@ npm install --save yeast
 
 ## Usage
 
-This module only exposes one single interface, so when you require yeast it will
-return a function that generates the unique ids:
+All the examples assume that this library is initialized as follow:
 
 ```js
 'use strict';
 
 var yeast = require('yeast');
+```
 
-console.log(yeast(), yeast(), yeast()); // outputs: i24hcpc4 i24hcpc4:0 i24hcpc4:1
+To generate an id just call the `yeast` function.
+
+```js
+console.log(yeast(), yeast(), yeast()); // outputs: KyxidwN KyxidwN:0 KyxidwN:1
 
 setTimeout(function () {
-  console.log(yeast()); // outputs: i24hd9hw
+  console.log(yeast()); // outputs: KyxidwO
 });
+```
+
+### yeast.encode(num)
+
+An helper function that returns a string representing the specified number. The
+returned string contains only URL safe characters.
+
+```js
+yeast.encode(+new Date()); // outputs: Kyxjuo1
+```
+
+### yeast.dencode(str)
+
+An helper function that returns the integer value specified by the given string.
+This function can be used to retrieve the timestamp from a `yeast` id.
+
+```js
+var id = yeast(); // holds the value: Kyxl1OU
+
+yeast.decode(id); // outputs: 1439816226334
 ```
 
 That's all folks. If you have ideas on how we can further compress the ids
@@ -55,4 +77,4 @@ please open an issue!
 
 ## License
 
-MIT
+[MIT](LICENSE)

@@ -9,9 +9,14 @@ describe('yeast', function () {
     assume(yeast).is.a('function');
   });
 
+  it('exposes the helper functions', function () {
+    assume(yeast.encode).is.a('function');
+    assume(yeast.decode).is.a('function');
+  });
+
   it('returns strings', function (next) {
     assume(yeast()).is.a('string');
-    setTimeout(next);
+    setTimeout(next, 10);
   });
 
   it('prepends an iterated seed when previous id is the same', function (next) {
@@ -21,7 +26,7 @@ describe('yeast', function () {
     assume(ids[1]).includes(':0');
     assume(ids[2]).includes(':1');
 
-    setTimeout(next);
+    setTimeout(next, 10);
   });
 
   it('resets the seed', function (next) {
@@ -38,8 +43,8 @@ describe('yeast', function () {
       assume(id[1]).includes(':0');
       assume(id[2]).includes(':1');
 
-      setTimeout(next);
-    });
+      setTimeout(next, 10);
+    }, 10);
   });
 
   it('does not collide', function () {
@@ -54,5 +59,15 @@ describe('yeast', function () {
     if (ids.some(function (id, index) {
       return ids.indexOf(id) !== index;
     })) throw new Error('Found a duplicate entry');
+  });
+
+  it('can convert the id to a timestamp', function (next) {
+    var now = Date.now()
+      , id = yeast();
+
+    assume(yeast.encode(now)).equals(id);
+    assume(yeast.decode(id)).equals(now);
+
+    setTimeout(next, 10);
   });
 });
