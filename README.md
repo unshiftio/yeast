@@ -61,7 +61,7 @@ returned string contains only URL safe characters.
 yeast.encode(+new Date()); // outputs: Kyxjuo1
 ```
 
-### yeast.dencode(str)
+### yeast.decode(str)
 
 An helper function that returns the integer value specified by the given string.
 This function can be used to retrieve the timestamp from a `yeast` id.
