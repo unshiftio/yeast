@@ -20,7 +20,7 @@ Yeast solves both of these issues by:
 2. Seeding the id in case of collision (when the id is identical to the previous
    one).
 
-To keep the strings unique it will use the `:` char to separate the generated
+To keep the strings unique it will use the `.` char to separate the generated
 stamp from the seed.
 
 ## Installation

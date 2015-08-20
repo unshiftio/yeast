@@ -22,9 +22,9 @@ describe('yeast', function () {
   it('prepends an iterated seed when previous id is the same', function (next) {
     var ids = [yeast(), yeast(), yeast()];
 
-    assume(ids[0]).does.not.include(':');
-    assume(ids[1]).includes(':0');
-    assume(ids[2]).includes(':1');
+    assume(ids[0]).does.not.include('.');
+    assume(ids[1]).includes('.0');
+    assume(ids[2]).includes('.1');
 
     setTimeout(next, 10);
   });
@@ -32,16 +32,16 @@ describe('yeast', function () {
   it('resets the seed', function (next) {
     var ids = [yeast(), yeast(), yeast()];
 
-    assume(ids[0]).does.not.include(':');
-    assume(ids[1]).includes(':0');
-    assume(ids[2]).includes(':1');
+    assume(ids[0]).does.not.include('.');
+    assume(ids[1]).includes('.0');
+    assume(ids[2]).includes('.1');
 
     setTimeout(function () {
       var id = [yeast(), yeast(), yeast()];
 
-      assume(id[0]).does.not.include(':');
-      assume(id[1]).includes(':0');
-      assume(id[2]).includes(':1');
+      assume(id[0]).does.not.include('.');
+      assume(id[1]).includes('.0');
+      assume(id[2]).includes('.1');
 
       setTimeout(next, 10);
     }, 10);
