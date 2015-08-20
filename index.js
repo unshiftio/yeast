@@ -64,7 +64,7 @@ function yeast() {
   var now = encode(+new Date());
 
   if (now !== prev) return seed = 0, prev = now;
-  return now +':'+ encode(seed++);
+  return now +'.'+ encode(seed++);
 }
 
 //
