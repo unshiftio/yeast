@@ -45,7 +45,7 @@ var yeast = require('yeast');
 To generate an id just call the `yeast` function.
 
 ```js
-console.log(yeast(), yeast(), yeast()); // outputs: KyxidwN KyxidwN:0 KyxidwN:1
+console.log(yeast(), yeast(), yeast()); // outputs: KyxidwN KyxidwN.0 KyxidwN.1
 
 setTimeout(function () {
   console.log(yeast()); // outputs: KyxidwO
