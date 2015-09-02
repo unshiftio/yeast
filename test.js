@@ -5,6 +5,11 @@ describe('yeast', function () {
   var assume = require('assume')
     , yeast = require('./');
 
+  function waitUntilNextMillisecond() {
+    var now = Date.now();
+    while (Date.now() === now) { /* do nothing */ }
+  }
+
   it('is exported as an function', function () {
     assume(yeast).is.a('function');
   });
@@ -14,37 +19,36 @@ describe('yeast', function () {
     assume(yeast.decode).is.a('function');
   });
 
-  it('returns strings', function (next) {
+  it('returns strings', function () {
     assume(yeast()).is.a('string');
-    setTimeout(next, 10);
   });
 
-  it('prepends an iterated seed when previous id is the same', function (next) {
+  it('prepends an iterated seed when previous id is the same', function () {
+    waitUntilNextMillisecond();
+
+    var ids = [yeast(), yeast(), yeast()];
+
+    assume(ids[0]).does.not.include('.');
+    assume(ids[1]).includes('.0');
+    assume(ids[2]).includes('.1');
+  });
+
+  it('resets the seed', function () {
+    waitUntilNextMillisecond();
+
     var ids = [yeast(), yeast(), yeast()];
 
     assume(ids[0]).does.not.include('.');
     assume(ids[1]).includes('.0');
     assume(ids[2]).includes('.1');
 
-    setTimeout(next, 10);
-  });
+    waitUntilNextMillisecond();
 
-  it('resets the seed', function (next) {
-    var ids = [yeast(), yeast(), yeast()];
+    ids = [yeast(), yeast(), yeast()];
 
     assume(ids[0]).does.not.include('.');
     assume(ids[1]).includes('.0');
     assume(ids[2]).includes('.1');
-
-    setTimeout(function () {
-      var id = [yeast(), yeast(), yeast()];
-
-      assume(id[0]).does.not.include('.');
-      assume(id[1]).includes('.0');
-      assume(id[2]).includes('.1');
-
-      setTimeout(next, 10);
-    }, 10);
   });
 
   it('does not collide', function () {
@@ -61,13 +65,13 @@ describe('yeast', function () {
     })) throw new Error('Found a duplicate entry');
   });
 
-  it('can convert the id to a timestamp', function (next) {
+  it('can convert the id to a timestamp', function () {
+    waitUntilNextMillisecond();
+
     var now = Date.now()
       , id = yeast();
 
     assume(yeast.encode(now)).equals(id);
     assume(yeast.decode(id)).equals(now);
-
-    setTimeout(next, 10);
   });
 });
