@@ -1,20 +1,6 @@
 'use strict';
 
-var alphabet = [
-  '0', '1', '2', '3', '4', '5', '6', '7',
-  '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
-  'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-  'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-  'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
-  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-  'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-  'u', 'v', 'w', 'x', 'y', 'z', '-', '_'
-];
-
-var length = alphabet.length
-  , map = {}
-  , seed = 0
-  , i = 0
+var seed = 0
   , prev;
 
 /**
@@ -25,14 +11,7 @@ var length = alphabet.length
  * @api public
  */
 function encode(num) {
-  var encoded = '';
-
-  do {
-    encoded = alphabet[num % length] + encoded;
-    num = Math.floor(num / length);
-  } while (num > 0);
-
-  return encoded;
+  return num.toString(36);
 }
 
 /**
@@ -43,15 +22,7 @@ function encode(num) {
  * @api public
  */
 function decode(str) {
-  var decoded = 0
-    , i = 0;
-
-  while (i < str.length) {
-    decoded = decoded * length + map[str.charAt(i)];
-    i++;
-  }
-
-  return decoded;
+  return parseInt(str, 36);
 }
 
 /**
@@ -65,14 +36,6 @@ function yeast() {
 
   if (now !== prev) return seed = 0, prev = now;
   return now +'.'+ encode(seed++);
-}
-
-//
-// Map each character to its index.
-//
-while (i < length) {
-  map[alphabet[i]] = i;
-  i++;
 }
 
 //
