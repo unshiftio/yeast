@@ -1,17 +1,7 @@
 'use strict';
 
-var alphabet = [
-  '0', '1', '2', '3', '4', '5', '6', '7',
-  '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
-  'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
-  'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-  'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
-  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-  'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-  'u', 'v', 'w', 'x', 'y', 'z', '-', '_'
-];
-
-var length = alphabet.length
+var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('')
+  , length = 64
   , map = {}
   , seed = 0
   , i = 0
@@ -43,12 +33,10 @@ function encode(num) {
  * @api public
  */
 function decode(str) {
-  var decoded = 0
-    , i = 0;
+  var decoded = 0;
 
-  while (i < str.length) {
+  for (i = 0; i < str.length; i++) {
     decoded = decoded * length + map[str.charAt(i)];
-    i++;
   }
 
   return decoded;
@@ -70,10 +58,7 @@ function yeast() {
 //
 // Map each character to its index.
 //
-while (i < length) {
-  map[alphabet[i]] = i;
-  i++;
-}
+for (; i < length; i++) map[alphabet[i]] = i;
 
 //
 // Expose the `yeast`, `encode` and `decode` functions.
