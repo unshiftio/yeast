@@ -6,8 +6,8 @@ describe('yeast', function () {
     , yeast = require('./');
 
   function waitUntilNextMillisecond() {
-    var now = Date.now();
-    while (Date.now() === now) { /* do nothing */ }
+    var now = +new Date();
+    while (+new Date() === now) { /* do nothing */ }
   }
 
   it('is exported as an function', function () {
@@ -52,23 +52,23 @@ describe('yeast', function () {
   });
 
   it('does not collide', function () {
-    var ids = [];
+    var length = 30000
+      , ids = new Array(length)
+      , i;
 
-    this.timeout(1200000);
+    for (i = 0; i < length; i++) ids[i] = yeast();
 
-    for (var i = 0; i < 100000; i++) {
-      ids.push(yeast());
+    ids.sort();
+
+    for (i = 0; i < length - 1; i++) {
+      if (ids[i] === ids[i + 1]) throw new Error('Found a duplicate entry');
     }
-
-    if (ids.some(function (id, index) {
-      return ids.indexOf(id) !== index;
-    })) throw new Error('Found a duplicate entry');
   });
 
   it('can convert the id to a timestamp', function () {
     waitUntilNextMillisecond();
 
-    var now = Date.now()
+    var now = +new Date()
       , id = yeast();
 
     assume(yeast.encode(now)).equals(id);
