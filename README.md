@@ -4,7 +4,7 @@
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/yeast.svg)](https://saucelabs.com/u/yeast)
 
-Yeast is a unique id generator. It has been primary designed to generate a
+Yeast is a unique id generator. It has been primarily designed to generate a
 unique id which can be used for cache busting. A common practice for this is
 to use a timestamp, but there are couple of downsides when using timestamps.
 
