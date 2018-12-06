@@ -1,11 +1,12 @@
 'use strict';
 
-var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('')
-  , length = 64
-  , map = {}
-  , seed = 0
-  , i = 0
-  , prev;
+const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split(''),
+      length = 64,
+      map = {};
+
+let seed = 0,
+    i = 0,
+    prev;
 
 /**
  * Return a string representing the specified number.
@@ -15,7 +16,7 @@ var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_
  * @api public
  */
 function encode(num) {
-  var encoded = '';
+  let encoded = '';
 
   do {
     encoded = alphabet[num % length] + encoded;
@@ -33,7 +34,7 @@ function encode(num) {
  * @api public
  */
 function decode(str) {
-  var decoded = 0;
+  let decoded = 0;
 
   for (i = 0; i < str.length; i++) {
     decoded = decoded * length + map[str.charAt(i)];
@@ -49,10 +50,10 @@ function decode(str) {
  * @api public
  */
 function yeast() {
-  var now = encode(+new Date());
+  const now = encode(+new Date());
 
   if (now !== prev) return seed = 0, prev = now;
-  return now +'.'+ encode(seed++);
+  return now + '.' + encode(seed++);
 }
 
 //

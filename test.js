@@ -1,42 +1,42 @@
 /* istanbul ignore next */
-describe('yeast', function () {
+describe('yeast', () => {
   'use strict';
 
-  var assume = require('assume')
-    , yeast = require('./');
+  const assume = require('assume'),
+        yeast = require('./');
 
   function waitUntilNextMillisecond() {
-    var now = +new Date();
+    const now = +new Date();
     while (+new Date() === now) { /* do nothing */ }
   }
 
-  it('is exported as an function', function () {
+  it('is exported as an function', () => {
     assume(yeast).is.a('function');
   });
 
-  it('exposes the helper functions', function () {
+  it('exposes the helper functions', () => {
     assume(yeast.encode).is.a('function');
     assume(yeast.decode).is.a('function');
   });
 
-  it('returns strings', function () {
+  it('returns strings', () => {
     assume(yeast()).is.a('string');
   });
 
-  it('prepends an iterated seed when previous id is the same', function () {
+  it('prepends an iterated seed when previous id is the same', () => {
     waitUntilNextMillisecond();
 
-    var ids = [yeast(), yeast(), yeast()];
+    const ids = [yeast(), yeast(), yeast()];
 
     assume(ids[0]).does.not.include('.');
     assume(ids[1]).includes('.0');
     assume(ids[2]).includes('.1');
   });
 
-  it('resets the seed', function () {
+  it('resets the seed', () => {
     waitUntilNextMillisecond();
 
-    var ids = [yeast(), yeast(), yeast()];
+    let ids = [yeast(), yeast(), yeast()];
 
     assume(ids[0]).does.not.include('.');
     assume(ids[1]).includes('.0');
@@ -51,10 +51,10 @@ describe('yeast', function () {
     assume(ids[2]).includes('.1');
   });
 
-  it('does not collide', function () {
-    var length = 30000
-      , ids = new Array(length)
-      , i;
+  it('does not collide', () => {
+    let length = 30000,
+        ids = new Array(length),
+        i;
 
     for (i = 0; i < length; i++) ids[i] = yeast();
 
@@ -65,11 +65,11 @@ describe('yeast', function () {
     }
   });
 
-  it('can convert the id to a timestamp', function () {
+  it('can convert the id to a timestamp', () => {
     waitUntilNextMillisecond();
 
-    var now = +new Date()
-      , id = yeast();
+    const now = +new Date(),
+          id = yeast();
 
     assume(yeast.encode(now)).equals(id);
     assume(yeast.decode(id)).equals(now);
