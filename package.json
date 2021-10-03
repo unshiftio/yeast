@@ -4,10 +4,8 @@
   "description": "Tiny but linear growing unique id generator",
   "main": "index.js",
   "scripts": {
-    "100%": "istanbul check-coverage --statements 100 --functions 100 --lines 100 --branches 100",
-    "coverage": "istanbul cover _mocha -- test.js",
-    "watch": "mocha --watch test.js",
-    "test": "mocha test.js"
+    "test": "c8 --reporter=lcov --reporter=text mocha test.js",
+    "watch": "mocha --watch test.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +25,7 @@
   "homepage": "https://github.com/unshiftio/yeast",
   "devDependencies": {
     "assume": "~1.5.0",
-    "istanbul": "0.4.x",
+    "c8": "~7.9.0",
     "mocha": "~3.5.0",
     "pre-commit": "~1.2.0"
   }
