@@ -1,6 +1,6 @@
 # yeast
 
-[![Version npm](https://img.shields.io/npm/v/yeast.svg?style=flat-square)](https://www.npmjs.com/package/yeast)[![Build Status](https://img.shields.io/github/workflow/status/unshiftio/yeast/CI/master?label=CI&style=flat-square)](https://github.com/unshiftio/yeast/actions?query=workflow%3ACI+branch%3Amaster)[![Dependencies](https://img.shields.io/david/unshiftio/yeast.svg?style=flat-square)](https://david-dm.org/unshiftio/yeast)[![Coverage Status](https://img.shields.io/coveralls/unshiftio/yeast/master.svg?style=flat-square)](https://coveralls.io/r/unshiftio/yeast?branch=master)
+[![Version npm](https://img.shields.io/npm/v/yeast.svg?style=flat-square)](https://www.npmjs.com/package/yeast)[![Build Status](https://img.shields.io/github/workflow/status/unshiftio/yeast/CI/master?label=CI&style=flat-square)](https://github.com/unshiftio/yeast/actions?query=workflow%3ACI+branch%3Amaster)[![Coverage Status](https://img.shields.io/coveralls/unshiftio/yeast/master.svg?style=flat-square)](https://coveralls.io/r/unshiftio/yeast?branch=master)
 
 Yeast is a unique id generator. It has been primarily designed to generate a
 unique id which can be used for cache busting. A common practice for this is
