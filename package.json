@@ -3,6 +3,11 @@
   "version": "0.1.2",
   "description": "Tiny but linear growing unique id generator",
   "main": "index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    "import": "./esm/index.js",
+    "require": "index.js"
+  },
   "scripts": {
     "test": "c8 --reporter=lcov --reporter=text mocha test.js",
     "watch": "mocha --watch test.js"
